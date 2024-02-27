@@ -1,4 +1,4 @@
-package uniandes.dpoo.aerolinea.modelo;
+	package uniandes.dpoo.aerolinea.modelo;
 
 import java.io.IOException;
 import java.util.ArrayList;
