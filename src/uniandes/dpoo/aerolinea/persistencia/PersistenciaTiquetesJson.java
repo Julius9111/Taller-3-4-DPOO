@@ -31,6 +31,7 @@ public class PersistenciaTiquetesJson implements IPersistenciaTiquetes
     private static final String CODIGO_TIQUETE = "codigoTiquete";
     private static final String FECHA = "fecha";
     private static final String CODIGO_RUTA = "codigoRuta";
+    
 
     /**
      * Carga la información de los clientes y tiquetes vendidos por la aerolínea, y actualiza la estructura de objetos que se encuentra dentro de la aerolínea

@@ -5,28 +5,35 @@ import uniandes.dpoo.aerolinea.tiquetes.Tiquete;
 
 public abstract class Cliente {
 	
-	public List<Tiquete> tiquetesUsados;
-	public List<Tiquete> tiquetesSinUsar;
+	private List<Tiquete> tiquetesSinUsar;
+	private List<Tiquete> tiquetesUsados;
 	
-	public Cliente() {}
-	
-	public String getTipoCliente() {
-		return null;
-	}
-	public String getIdentificador() {
-		return null;
+	public Cliente() {
+		
 	}
 	
+	public abstract String getTipoCliente();
+	public abstract String getIdentificador();
 	public void agregarTiquete(Tiquete tiquete) {
-		
+		tiquetesSinUsar.add(tiquete);
 	}
-	
 	public int calcularValorTotalTiquetes() {
-		return 0;
+		int valorTotalTiquetes = 0;
+		for (Tiquete tiquete : tiquetesSinUsar) {
+			int valorTiquete = tiquete.getTarifa();
+			valorTotalTiquetes += valorTiquete;
+		}
+		return valorTotalTiquetes;
 	}
-	
-	public void usarTiquetes() {
-		
+	public void usarTiquetes(Vuelo vuelo) {
+		Collection<Tiquete> tiquetes = vuelo.getTiquetes();
+		for (Tiquete tiquete : tiquetes) {
+			Cliente cliente = tiquete.getCliente();
+			String id = cliente.getIdentificador();
+			if (id == this.getIdentificador()) {
+				tiquetesUsados.add(tiquete);
+				tiquetesSinUsar.remove(tiquete);
+			}
+		}
 	}
-
 }

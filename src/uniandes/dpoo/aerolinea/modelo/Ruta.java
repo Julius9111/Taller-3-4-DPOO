@@ -6,47 +6,59 @@ package uniandes.dpoo.aerolinea.modelo;
 public class Ruta
 {
     // TODO completar
+	
 	private String horaSalida;
 	private String horaLlegada;
 	private String codigoRuta;
-	public Aeropuerto origen;
-	public Aeropuerto destino;
-	
-	public Ruta(Aeropuerto origen, Aeropuerto destino, String horaSalida, String horaLlegada, String codigoRuta){
-		this.origen = origen;
-		this.destino = destino;
+	private Aeropuerto origen;
+	private Aeropuerto destino;
+
+    public Ruta(String horaSalida, String horaLlegada, String codigoRuta, Aeropuerto origen, Aeropuerto destino) {
+		super();
 		this.horaSalida = horaSalida;
 		this.horaLlegada = horaLlegada;
 		this.codigoRuta = codigoRuta;
+		this.origen = origen;
+		this.destino = destino;
+	}
+
+	public String getHoraSalida() {
+		return horaSalida;
+	}
+
+	public String getHoraLlegada() {
+		return horaLlegada;
+	}
+
+	public String getCodigoRuta() {
+		return codigoRuta;
+	}
+
+	public Aeropuerto getOrigen() {
+		return origen;
+	}
+
+	public Aeropuerto getDestino() {
+		return destino;
 	}
 	
-	
-	 public String getHoraSalida() {
-			return horaSalida;
-		}
+	public int getDuracion() {
+		int horasLlegada = getHoras(horaLlegada);
+		int horasSalida = getHoras(horaSalida);
+		int minutosLlegada = getMinutos(horaLlegada);
+		int minutosSalida = getMinutos(horaSalida);
+		int llegadaTotalMinutos = horasLlegada*60 + minutosLlegada;
+		int salidaTotalMinutos = horasSalida*60 + minutosSalida;
 
+        if (llegadaTotalMinutos < salidaTotalMinutos) {
+            llegadaTotalMinutos += 24 * 60;
+        }
+        
+        int duracionMinutos = llegadaTotalMinutos - salidaTotalMinutos;
+		return duracionMinutos;
+	}
 
-		public String getHoraLlegada() {
-			return horaLlegada;
-		}
-
-
-		public String getCodigoRuta() {
-			return codigoRuta;
-		}
-
-
-		public Aeropuerto getOrigen() {
-			return origen;
-		}
-
-
-		public Aeropuerto getDestino() {
-			return destino;
-		}
-
-		
-    /**
+	/**
      * Dada una cadena con una hora y minutos, retorna los minutos.
      * 
      * Por ejemplo, para la cadena '715' retorna 15.
